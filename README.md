@@ -140,5 +140,4 @@ logsight-pro/
 Contributions are welcome! Please feel free to fork the repository, make changes, and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
-<!-- Choose a license if you want, e.g., MIT -->
-This project is licensed under the MIT License - see the LICENSE.md file (if you create one) for details.
+This project is licensed under the MIT License - see the LICENSE.md file for details.
