@@ -7,7 +7,7 @@ import tempfile
 import xml.etree.ElementTree as ET
 import re
 
-EVTXECMD_PATH = r"C:\Users\Farha\Downloads\EvtxECmd\EvtxeCmd\EvtxECmd.exe"  # Your path
+EVTXECMD_PATH = r"C:\Tools\ZimmermanTools\EvtxECmd.exe"  # Your path
 
 
 def parse_xml_payload(xml_string):
