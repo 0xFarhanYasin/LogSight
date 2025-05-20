@@ -36,7 +36,7 @@ This tool empowers security analysts, incident responders, and system administra
 
 ## Project Structure Overview
 Use code with caution.
-Markdown
+```bash
 logsight-pro/
 ├── .env.example # Example environment file for API keys
 ├── .gitignore # Specifies intentionally untracked files
@@ -48,7 +48,7 @@ logsight-pro/
 ├── requirements.txt # Python package dependencies
 ├── uploaded_logs_temp/ # Temporary storage for uploads (created automatically, in .gitignore)
 └── README.md # This file
-
+```
 ## Setup and Installation
 
 **Prerequisites:**
