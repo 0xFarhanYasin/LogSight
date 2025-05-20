@@ -64,7 +64,7 @@ logsight-pro/
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/YOUR_USERNAME/LogSight-Pro.git 
+    git clone https://github.com/0xFarhanYasin/LogSight.git 
     # Replace YOUR_USERNAME with your GitHub username
     cd LogSight-Pro
     ```
