@@ -84,11 +84,7 @@ def parse_evtx_file_with_evtxecmd(input_evtx_path, max_entries=None):
             # print(f"EvtxECmd successful. Reading CSV: {actual_csv_path}")
             df = pd.read_csv(actual_csv_path, low_memory=False, na_filter=False, dtype=str)
 
-            # if not df.empty:
-            #     print(f"DEBUG: CSV Columns for '{os.path.basename(input_evtx_path)}': {df.columns.tolist()}")
-            # else:
-            #     print(f"DEBUG: CSV for '{os.path.basename(input_evtx_path)}' was empty.")
-            #     return pd.DataFrame()
+            
 
             if df.empty: return pd.DataFrame()  # Return early if CSV is empty
 
