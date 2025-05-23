@@ -41,8 +41,7 @@ def convert_backticks_to_font_tags(text_segment):
     """
     if text_segment is None:  # Handle None input
         return ""
-    # This regex finds content between two backticks.
-    # It's non-greedy (.*?) to handle multiple pairs in one line correctly.
+    
     return re.sub(r'`(.*?)`', r"<font name='Courier'>\1</font>", str(text_segment))
 
 
