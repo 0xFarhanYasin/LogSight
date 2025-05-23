@@ -6,7 +6,7 @@ import dash_bootstrap_components as dbc
 import base64, io, os, pandas as pd, plotly.express as px
 from datetime import date, datetime  # Added datetime for PDF filename
 
-# Import your custom modules
+
 import database as db
 from log_parser import parse_evtx_file_with_evtxecmd  # Ensure this matches your parser function name
 from llm_analyzer import analyze_log_entry_with_gemini, get_deep_dive_llm_analysis, get_report_summary_llm
@@ -339,8 +339,7 @@ def display_log_details(file_id, page_from_pgn, current_filters, stored_page):
     date_start = current_filters.get("date_start");
     date_end = current_filters.get("date_end")
 
-    # Correctly determine the source of the callback trigger
-    # triggered_id_info will be the string ID of the component (e.g., 'log-pagination', 'selected-file-id-store', 'current-filters-store')
+    
     triggered_id_info = ctx.triggered[0]['prop_id'].split('.')[0] if ctx.triggered and ctx.triggered[
         0] else 'selected-file-id-store'  # Added check for ctx.triggered[0]
 
@@ -350,7 +349,7 @@ def display_log_details(file_id, page_from_pgn, current_filters, stored_page):
         page = 1
     elif stored_page is not None:
         page = stored_page
-    # else page remains 1 (its default from initialization)
+    
 
     details = db.get_log_file_details(file_id)
     header = f"Detailed Logs for: {details['filename']} (ID: {file_id})" if details else "Log Details"
@@ -360,12 +359,10 @@ def display_log_details(file_id, page_from_pgn, current_filters, stored_page):
     total_logs = db.get_parsed_log_count_for_file(file_id, kw, eid, lvl, prov, date_start, date_end)
     max_pgs = (total_logs + LOG_DETAILS_PAGE_SIZE - 1) // LOG_DETAILS_PAGE_SIZE if total_logs > 0 else 1
 
-    # Adjust page if it's out of bounds after filtering or file change
     if page > max_pgs: page = max_pgs if max_pgs > 0 else 1
     if page == 0 and max_pgs > 0: page = 1  # Ensure page is at least 1 if there are pages
 
-    # Re-fetch if page was adjusted due to max_pgs changing OR if it was a filter/file change and we reset to page 1 (and page 1 wasn't what pagination naturally had)
-    # This logic aims to ensure the data matches the determined 'page'
+    
     current_page_from_pagination_input = page_from_pgn if page_from_pgn is not None else page  # Use current 'page' if pagination wasn't trigger
     if page != current_page_from_pagination_input and (
             triggered_id_info in ['selected-file-id-store', 'current-filters-store']):
@@ -380,8 +377,7 @@ def display_log_details(file_id, page_from_pgn, current_filters, stored_page):
                     "level": "Lvl", "description": "Desc.", "llm_explanation": "LLM Notes",
                     "llm_relevance": "LLM Risk", "llm_iocs": "LLM IoCs"}
 
-        # Ensure 'log_id' is always included in data_for_table for the modal, even if not in cols_map for display
-        # The current cols_map includes "log_id": "ID", so it should be fine.
+        
 
         table_cols = [{"name": v, "id": k, "type": "text",
                        "presentation": "markdown" if k == "log_id" else "input"}
