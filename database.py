@@ -106,7 +106,6 @@ def bulk_insert_parsed_logs(file_id, parsed_logs_df):
     return inserted_count
 
 
-# MODIFIED for Filtering including Date Range
 def get_parsed_logs_for_file(file_id, page=1, page_size=20,
                              keyword_search=None, filter_event_id=None,
                              filter_level=None, filter_provider=None,
@@ -150,7 +149,6 @@ def get_parsed_logs_for_file(file_id, page=1, page_size=20,
     return df
 
 
-# MODIFIED for Filtering including Date Range
 def get_parsed_log_count_for_file(file_id, keyword_search=None, filter_event_id=None,
                                   filter_level=None, filter_provider=None,
                                   date_start=None, date_end=None):  # New date filters
@@ -203,7 +201,6 @@ def get_parsed_logs_without_llm_analysis(file_id, limit=5):
     return df
 
 
-# --- AGGREGATION FUNCTIONS (same as your file) ---
 def get_event_id_counts(file_id):
     conn = get_db_connection()
     query = "SELECT event_id, COUNT(*) as count FROM parsed_logs WHERE file_id = ? GROUP BY event_id ORDER BY count DESC"
@@ -228,7 +225,6 @@ def get_provider_counts(file_id):
     return df
 
 
-# New function to get a single full log entry (including raw_summary) for deep dive
 def get_full_log_entry_details(log_id):
     conn = get_db_connection()
     # Fetch all relevant fields for a deep dive
