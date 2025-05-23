@@ -66,7 +66,7 @@ logsight-pro/
     ```bash
     git clone https://github.com/0xFarhanYasin/LogSight.git 
     # Replace YOUR_USERNAME with your GitHub username
-    cd LogSight-Pro
+    cd LogSight
     ```
 
 2.  **Create and Activate a Python Virtual Environment:**
