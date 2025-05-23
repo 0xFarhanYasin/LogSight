@@ -31,18 +31,15 @@ def parse_llm_response_structured(analysis_text):
 
 
 
-    # Split by known keys to find sections
     sections = {}
     current_section_key = None
 
-    # Define keys in the order they are expected to appear (or any order if not strict)
 
     known_keys_in_order = [
         "Explanation:", "Relevance:", "IoCs:",
         "Suggested Mitigation:", "Further Investigation Steps:"
     ]
 
-    # Split the text into lines to process
     lines = analysis_text.split('\n')
 
     temp_buffer = []
@@ -72,7 +69,6 @@ def parse_llm_response_structured(analysis_text):
                     if parsed_key:
                         parsed[parsed_key] = " ".join(temp_buffer).strip()
 
-                # Start new buffer for the new key
                 current_section_key = key_prefix
                 temp_buffer = [line_stripped.replace(key_prefix, "").strip()]
                 found_new_key = True
@@ -83,7 +79,6 @@ def parse_llm_response_structured(analysis_text):
             if line_stripped:  # Append only if non-empty after stripping
                 temp_buffer.append(line_stripped)
 
-    # Save the last buffer
     if current_section_key and temp_buffer:
         if current_section_key == "Explanation:":
             parsed_key = "Explanation"
@@ -101,7 +96,6 @@ def parse_llm_response_structured(analysis_text):
         if parsed_key:
             parsed[parsed_key] = " ".join(temp_buffer).strip()
 
-    # Fallback if main parsing yields mostly N/A but text exists
     all_na = all(v == "N/A" for k, v in parsed.items() if
                  k != "Mitigation" and k != "Further_Investigation")  # Check primary fields
     if all_na and any(key_prefix in analysis_text for key_prefix in
@@ -221,7 +215,6 @@ def get_deep_dive_llm_analysis(full_log_summary_for_llm):
                 "Mitigation": "Error contacting LLM", "Further_Investigation": "Error contacting LLM"}
 
 
-# --- NEW FUNCTION FOR PDF REPORT SUMMARY ---
 def get_report_summary_llm(log_samples_summary_string, original_filename):
     """
     Generates an executive summary for a report based on a sample of log summaries.
